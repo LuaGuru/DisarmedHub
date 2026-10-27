@@ -27,7 +27,6 @@ local KeySystem = {
         LinkvertiseLink = "https://flowauth.net/reward/d898da8eb28122b7dfaf89b20f926d54",
         WorkInkLink = "https://flowauth.net/reward/d898da8eb28122b7dfaf89b20f926d54",
         LootLabsLink = "https://flowauth.net/reward/d898da8eb28122b7dfaf89b20f926d54",
-        DiscordInvite = "https://discord.gg/Nk44e68bmn",
         Games = {
             [66654135] = {
                 FFA = true,
