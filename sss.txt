@@ -3,7 +3,7 @@ local function CopyUnexpectedError(Error)
     if type(setclipboard) == "function" then
         pcall(setclipboard, Raw)
     end
-    warn("[Zero Point Key System] " .. Raw)
+    warn("[DisarmedHub Key System] " .. Raw)
     return Raw
 end
 
@@ -19,10 +19,10 @@ local KeySystem = {
         UserInputService = game:GetService("UserInputService"),
     },
     Config = {
-        Name = "ZeroPointKeySystem",
+        Name = "DisarmedHubKeySystem",
         KeylessRetryDelay = 3,
-        Folder = "ZeroPoint",
-        KeyFile = "ZeroPoint/FlowAuthKey.txt",
+        Folder = "DisarmedHub",
+        KeyFile = "DisarmedHub/FlowAuthKey.txt",
         Loader = "https://flowauth.net/v1/loaders/d898da8eb28122b7dfaf89b20f926d54.lua",
         LinkvertiseLink = "https://flowauth.net/reward/d898da8eb28122b7dfaf89b20f926d54",
         WorkInkLink = "https://flowauth.net/reward/d898da8eb28122b7dfaf89b20f926d54",
@@ -225,7 +225,7 @@ function KeySystem.Functions.ReportError(Error, Stage, Credential)
     if type(setclipboard) == "function" then
         pcall(setclipboard, Raw)
     end
-    warn("[Zero Point Key System] " .. tostring(Stage or "Runtime") .. " failed: " .. KeySystem.Functions.RedactError(Raw, Credential))
+    warn("[DisarmedHub Key System] " .. tostring(Stage or "Runtime") .. " failed: " .. KeySystem.Functions.RedactError(Raw, Credential))
     return Raw
 end
 
@@ -455,7 +455,7 @@ function KeySystem.Functions.CreateGui()
     Title.Position = UDim2.fromOffset(0, 0)
     Title.Size = UDim2.fromOffset(155, 48)
     Title.Font = Enum.Font.GothamBlack
-    Title.Text = "Zero Point"
+    Title.Text = "DisarmedHub"
     Title.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title.TextSize = 20
     Title.TextXAlignment = Enum.TextXAlignment.Center
@@ -552,7 +552,7 @@ function KeySystem.Functions.CreateGui()
     SidebarHint.Size = UDim2.new(1, -24, 0, 34)
     SidebarHint.BackgroundTransparency = 1
     SidebarHint.Font = Enum.Font.GothamBlack
-    SidebarHint.Text = "Secure access\nfor Zero Point"
+    SidebarHint.Text = "Secure access\nfor DisarmedHub"
     SidebarHint.TextColor3 = Color3.fromRGB(127, 127, 127)
     SidebarHint.TextSize = 11
     SidebarHint.TextWrapped = true
@@ -897,21 +897,21 @@ function KeySystem.Functions.Start()
 
         local Environment = type(getgenv) == "function" and getgenv() or _G
         local RetryToken = {}
-        Environment.ZeroPointKeylessRetryToken = RetryToken
+        Environment.DisarmedHubKeylessRetryToken = RetryToken
 
         task.spawn(function()
             local Attempt = 0
-            while Environment.ZeroPointKeylessRetryToken == RetryToken do
+            while Environment.DisarmedHubKeylessRetryToken == RetryToken do
                 Attempt += 1
                 local Success, ErrorMessage = KeySystem.Functions.LoadGameScript(nil)
                 if Success then
-                    if Environment.ZeroPointKeylessRetryToken == RetryToken then
-                        Environment.ZeroPointKeylessRetryToken = nil
+                    if Environment.DisarmedHubKeylessRetryToken == RetryToken then
+                        Environment.DisarmedHubKeylessRetryToken = nil
                     end
                     return
                 end
 
-                warn(("[Zero Point] Keyless load attempt %d failed: %s. Retrying in %s seconds.")
+                warn(("[DisarmedHub] Keyless load attempt %d failed: %s. Retrying in %s seconds.")
                     :format(Attempt, tostring(ErrorMessage), tostring(KeySystem.Config.KeylessRetryDelay)))
                 task.wait(KeySystem.Config.KeylessRetryDelay)
             end
